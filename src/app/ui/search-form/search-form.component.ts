@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ɵisObservable } from '@angular/core';
 import { FhirSearchFn, ISearchFormData } from '@red-probeaufgabe/types';
 
 @Component({
@@ -9,6 +9,7 @@ import { FhirSearchFn, ISearchFormData } from '@red-probeaufgabe/types';
 export class SearchFormComponent {
   /** Implement Search Form */
   formData: ISearchFormData;
+  timeoutId;
 
   @Output() changed: EventEmitter<Object> = new EventEmitter();
 
@@ -32,6 +33,13 @@ export class SearchFormComponent {
   }
 
   onFormDataChanged(): void {
-    this.changed.emit(this.formData);
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
+
+    this.timeoutId = setTimeout(() => {
+      console.log('search');
+      this.changed.emit(this.formData);
+    }, 250);
   }
 }
