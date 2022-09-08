@@ -1,0 +1,18 @@
+<mat-card class="detail-card">
+  <!-- <div mat-card-avatar class="example-header-image"></div> -->
+  <mat-card-subtitle>{{ item.resourceType }} / #{{ item.id }}</mat-card-subtitle>
+  <mat-card-title>{{ item.name }}</mat-card-title>
+
+  <mat-card-content *ngIf="isPatient">
+    <ul class="info-list">
+      <li>Birthdate: {{ item.birthDate || '--' }}</li>
+      <li>Gender: {{ item.gender || '--' }}</li>
+      <li>Address: {{ item.address || '--' }}</li>
+    </ul>
+  </mat-card-content>
+  <mat-card-content *ngIf="!isPatient && item.telecom">
+    <ul class="info-list">
+      <li *ngFor="let entry of item.telecom">{{ entry.system }}: {{ entry.value }} ({{ entry.use }})</li>
+    </ul>
+  </mat-card-content>
+</mat-card>

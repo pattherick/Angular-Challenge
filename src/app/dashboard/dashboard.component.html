@@ -1,0 +1,18 @@
+<app-grid-container>
+  <div class="content" content>
+    <!-- search -->
+    <app-search (changed)="onSearchChanged($event)"></app-search>
+
+    <!-- result table -->
+    <app-unicorn-table
+      [columns]="columns"
+      [entries]="entries$ | async"
+      [isLoading]="isLoading"
+      [totalLength]="totalLength$ | async"
+      (itemSelected)="onItemSelected($event)"
+    ></app-unicorn-table>
+
+    <!-- selected item -->
+    <app-detail-card *ngIf="selectedItem != null" [item]="selectedItem"> </app-detail-card>
+  </div>
+</app-grid-container>

@@ -1,0 +1,22 @@
+<!-- implement search form here -->
+<form class="form">
+  <mat-form-field appearance="fill" class="search-input">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      placeholder="Search..."
+      [(ngModel)]="formData.searchText"
+      name="query"
+      (ngModelChange)="onFormDataChanged()"
+    />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="select-input">
+    <mat-label>Resource type</mat-label>
+    <mat-select [(ngModel)]="formData.searchFuncSelect" name="resource-type" (ngModelChange)="onFormDataChanged()">
+      <mat-option *ngFor="let resourceType of resourceTypes" [value]="resourceType.value">
+        {{ resourceType.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
